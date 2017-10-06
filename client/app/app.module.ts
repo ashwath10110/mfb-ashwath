@@ -72,6 +72,7 @@ import { UrlFormComponent } from './leafy-green-vegetables/url-form/url-form.com
     ExoticVegetablesComponent,
     TabsComponent,
     NavbarComponent,
+    FooterComponent,
     LeafyGreenVegetablesComponent,
     SearchBarComponent,
     FiltersComponent,
