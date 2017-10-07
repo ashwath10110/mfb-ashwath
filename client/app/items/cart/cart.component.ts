@@ -20,37 +20,35 @@ export class CartComponent implements OnInit {
   expandedHeight: string
   cartTotal: number = 0
 
-
   changeDetectorRef: ChangeDetectorRef
-
 
   constructor(private cartService: CartService, changeDetectorRef: ChangeDetectorRef) {
     this.changeDetectorRef = changeDetectorRef
   }
 
   ngOnInit() {
-    this.expandedHeight = '0'
+    this.expandedHeight = '0';
     this.cartService.productAdded$.subscribe(data => {
-      this.products = data.products
-      this.cartTotal = data.cartTotal
+      this.products = data.products;
+      this.cartTotal = data.cartTotal;
       this.numProducts = data.products.reduce((acc, product) => {
-        acc+=product.quantity
-        return acc
+        acc+=product.quantity;
+        return acc;
       }, 0)
 
       //Make a plop animation
       if(this.numProducts > 1){
-        this.animatePlop = true
+        this.animatePlop = true;
         setTimeout(()=>{
-          this.animatePlop = false
+          this.animatePlop = false;
         },160)
       }else if(this.numProducts == 1){
-        this.animatePopout = true
+        this.animatePopout = true;
         setTimeout(()=>{
-          this.animatePopout = false
+          this.animatePopout = false;
         },300)
       }
-      this.expandedHeight = (this.products.length*PRODUCT_HEIGHT+OFFSET_HEIGHT) + 'px'
+      this.expandedHeight = (this.products.length*PRODUCT_HEIGHT+OFFSET_HEIGHT) + 'px';
       if(!this.products.length){
         this.expanded = false
       }
@@ -69,5 +67,4 @@ export class CartComponent implements OnInit {
   onCartClick(){
     this.expanded = !this.expanded
   }
-
 }

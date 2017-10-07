@@ -12,7 +12,7 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 import { ItemsService } from './../services/items.service';
 import { TabsComponent } from './../tabs/tabs.component';
 
-import {Router, ActivatedRoute, Params} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-items',
@@ -51,18 +51,11 @@ export class ItemsComponent implements OnInit {
 
   ngOnInit(){
 
-    debugger;
-
     this.sub = this.route.params.subscribe(params => {
 
-      debugger;
-       this.typeOfVegetables = params['id']; // (+) converts string 'id' to a number
+      this.typeOfVegetables = params['id'];
 
         this.getLeafyGreenVegetables();
-
-        // this.dataService.getData().then(data => {
-        //   this.originalData = data;
-        // })
 
     });
 
