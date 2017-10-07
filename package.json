@@ -20,6 +20,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^4.4.4",
     "@angular/common": "^4.2.4",
     "@angular/compiler": "^4.2.4",
     "@angular/core": "^4.2.4",
@@ -31,7 +32,7 @@
     "angular2-jwt": "^0.2.3",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
-    "bootstrap": "4.0.0-alpha.5",
+    "bootstrap": "3.3.7",
     "core-js": "^2.4.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
@@ -40,6 +41,7 @@
     "jsonwebtoken": "^8.0.1",
     "mongoose": "^4.10.4",
     "morgan": "^1.8.2",
+    "primeng": "^4.2.2",
     "rxjs": "^5.4.2",
     "tether": "1.4.0",
     "zone.js": "^0.8.14"

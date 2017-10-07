@@ -21,7 +21,6 @@ export class ItemsService {
   }
 
   addLeafyGreenVegetable(leafyGreenVegetables): Observable<any> {
-    debugger;
     return this.http.post('/api/items', JSON.stringify(leafyGreenVegetables), this.options);
   }
 

@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, ElementRef } from '@angular/core';
 import { Http } from '@angular/http';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
-import { ExoticVegetablesService } from '../services/exotic-vegetables.service';
+import { ItemsService } from '../services/items.service';
 import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
-  selector: 'app-cats1',
-  templateUrl: './exotic-vegetables.component.html',
-  styleUrls: ['./exotic-vegetables.scss']
+  selector: 'app-add-items',
+  templateUrl: './add-items.component.html',
+  styleUrls: ['./add-items.scss']
 })
-export class ExoticVegetablesComponent implements OnInit {
+export class AddItemsComponent implements OnInit {
 
   leafyGreenVegetable = {};
   leafyGreenVegetables = [];
@@ -18,21 +18,46 @@ export class ExoticVegetablesComponent implements OnInit {
   isEditing = false;
 
   addCatForm: FormGroup;
-  name = new FormControl('', Validators.required);
-  age = new FormControl('', Validators.required);
-  weight = new FormControl('', Validators.required);
+  image1:any;
+  image2:any;
 
-  constructor(private exoticVegetablesService: ExoticVegetablesService,
+  name = new FormControl('', Validators.required);
+  type = new FormControl('', Validators.required);
+  countPerKg = new FormControl('', Validators.required);
+  averageWeightPerPiece = new FormControl('', Validators.required);
+  weight = new FormControl('', Validators.required);
+  price = new FormControl('', Validators.required);
+  
+  @ViewChildren("fileInput") fileInput;
+
+  imageHolder = [];
+
+  constructor(private exoticVegetablesService: ItemsService,
               private formBuilder: FormBuilder,
               private http: Http,
-              public toast: ToastComponent) { }
+              public toast: ToastComponent) { 
+  }
+
+  imageChange(input,i){
+    var files = (input.target.files[0]);
+    this.imageHolder[i] = window.URL.createObjectURL(input.target.files[0]);
+    var reader = new FileReader();
+    reader.addEventListener("load", (event:any) => {
+      this.imageHolder[i] = event.target.result;
+    }, false);
+    reader.readAsDataURL(input.target.files[0]);
+  }
 
   ngOnInit() {
+    
     this.getLeafyGreenVegetables();
+
     this.addCatForm = this.formBuilder.group({
-      name: this.name,
-      age: this.age,
-      weight: this.weight
+        name:this.name,
+        type:this.type,
+        countPerKg:this.countPerKg,
+        averageWeightPerPiece:this.averageWeightPerPiece,
+        price:this.price
     });
   }
 
@@ -45,9 +70,17 @@ export class ExoticVegetablesComponent implements OnInit {
   }
 
   addLeafyGreenVegetable() {
-    this.exoticVegetablesService.addLeafyGreenVegetable(this.addCatForm.value).subscribe(
+
+    debugger;
+
+    var cat = this.addCatForm.value;
+    cat.imageForShowCase = this.imageHolder[1];
+    cat.imageForCart = this.imageHolder[2];
+
+    this.exoticVegetablesService.addLeafyGreenVegetable(cat).subscribe(
       res => {
         const newCat = res.json();
+        debugger;
         this.leafyGreenVegetables.push(newCat);
         this.addCatForm.reset();
         this.toast.setMessage('item added successfully.', 'success');
@@ -69,11 +102,18 @@ export class ExoticVegetablesComponent implements OnInit {
     this.getLeafyGreenVegetables();
   }
 
-  editLeafyGreenVegetable(leafyGreenVegetable) {
-    this.exoticVegetablesService.editLeafyGreenVegetable(leafyGreenVegetable).subscribe(
+  editLeafyGreenVegetable(cat) {
+    
+    debugger;
+    // var cat = this.addCatForm.value;
+    cat.imageForShowCase = this.imageHolder[1];
+    cat.imageForCart = this.imageHolder[2];
+
+    debugger;
+    this.exoticVegetablesService.editLeafyGreenVegetable(cat).subscribe(
       res => {
         this.isEditing = false;
-        this.leafyGreenVegetable = leafyGreenVegetable;
+        this.leafyGreenVegetable = cat;
         this.toast.setMessage('item edited successfully.', 'success');
       },
       error => console.log(error)

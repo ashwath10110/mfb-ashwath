@@ -18,6 +18,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(morgan('dev'));
 var mongoDB = 'mongodb://admin:admin@ds111895.mlab.com:11895/mfb-db';
+// var mongoDB = '';
 if (process.env.NODE_ENV === 'test') {
     // mongoDB = 'mongodb://admin:admin@ds111895.mlab.com:11895/mfb-db';
 }

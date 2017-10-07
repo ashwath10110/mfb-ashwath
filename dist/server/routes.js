@@ -1,15 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
-var cat_1 = require("./controllers/cat");
 var user_1 = require("./controllers/user");
-var leafy_green_vegetables_1 = require("./controllers/leafy-green-vegetables");
+var cat_1 = require("./controllers/cat");
 var items_1 = require("./controllers/items");
 function setRoutes(app) {
     var router = express.Router();
     var catCtrl = new cat_1.default();
     var userCtrl = new user_1.default();
-    var leafyGreenVegetablesCtrl = new leafy_green_vegetables_1.default();
     var itemsCtrl = new items_1.default();
     // Cats
     router.route('/cats').get(catCtrl.getAll);
@@ -18,13 +16,6 @@ function setRoutes(app) {
     router.route('/cat/:id').get(catCtrl.get);
     router.route('/cat/:id').put(catCtrl.update);
     router.route('/cat/:id').delete(catCtrl.delete);
-    // LeafyGreenVegetables
-    router.route('/leafy-green-vegetables').get(leafyGreenVegetablesCtrl.getAll);
-    router.route('/leafy-green-vegetables/count').get(leafyGreenVegetablesCtrl.count);
-    router.route('/leafy-green-vegetables').post(leafyGreenVegetablesCtrl.insert);
-    router.route('/leafy-green-vegetables/:id').get(leafyGreenVegetablesCtrl.get);
-    router.route('/leafy-green-vegetables/:id').put(leafyGreenVegetablesCtrl.update);
-    router.route('/leafy-green-vegetables/:id').delete(leafyGreenVegetablesCtrl.delete);
     // Items
     router.route('/items').get(itemsCtrl.getAll);
     router.route('/items/count').get(itemsCtrl.count);
