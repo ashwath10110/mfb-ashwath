@@ -13,8 +13,11 @@
           <th>countPerKg</th>
           <th>averageWeightPerPiece</th>
           <th>price</th>
+          <th>available</th>
+          <th>description</th>
           <th>imageForShowCase</th>
           <th>imageForCart</th>
+          
         </tr>
       </thead>
       <tbody *ngIf="leafyGreenVegetables.length === 0">
@@ -29,7 +32,9 @@
           <td>{{cat.countPerKg}}</td>
           <td>{{cat.averageWeightPerPiece}}</td>
           <td>{{cat.price}}</td>
-
+          <td>{{cat.available}}</td>
+          <td>{{cat.description}}</td>
+          
           <td><img [src]="cat.imageForShowCase"/></td>
           <td><img [src]="cat.imageForCart"/></td>
           <td>
@@ -56,6 +61,13 @@
               <div class="form-group">
                   <input class="form-control" type="text" name="price" [(ngModel)]="leafyGreenVegetable.price" placeholder="price" required>
               </div>
+              <div class="form-group">
+                  <input class="form-control" type="text" name="available" [(ngModel)]="leafyGreenVegetable.available" placeholder="available" required>
+              </div>
+              <div class="form-group">
+                  <input class="form-control" type="text" name="description" [(ngModel)]="leafyGreenVegetable.description" placeholder="description" required>
+              </div>
+              
               <div class="form-group">
                 <input class="form-control" #fileInput (change)="imageChange($event,1)" type="file" name="imageForCart" placeholder="imageForCart">
               </div>
@@ -90,6 +102,12 @@
       </div>  
       <div class="form-group">
         <input class="form-control" type="text" name="price" formControlName="price" placeholder="price">
+      </div>
+       <div class="form-group">
+        <input class="form-control" type="text" name="available" formControlName="available" placeholder="available">
+      </div>
+       <div class="form-group">
+        <input class="form-control" type="text" name="description" formControlName="description" placeholder="description">
       </div>
       <div class="form-group">
         <input class="form-control" #fileInput (change)="imageChange($event,1)" type="file" name="imageForCart" placeholder="imageForCart">

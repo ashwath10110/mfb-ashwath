@@ -27,7 +27,9 @@ export class ItemsComponent implements OnInit {
   averageWeightPerPiece = new FormControl('', Validators.required);
   weight = new FormControl('', Validators.required);
   price = new FormControl('', Validators.required);
-  
+  available = new FormControl('', Validators.required);
+  description = new FormControl('', Validators.required);
+
   @ViewChildren("fileInput") fileInput;
 
   imageHolder = [];
@@ -57,7 +59,9 @@ export class ItemsComponent implements OnInit {
         type:this.type,
         countPerKg:this.countPerKg,
         averageWeightPerPiece:this.averageWeightPerPiece,
-        price:this.price
+        price:this.price,
+        available:this.available,
+        description:this.description
     });
   }
 
@@ -71,8 +75,6 @@ export class ItemsComponent implements OnInit {
 
   addLeafyGreenVegetable() {
 
-    debugger;
-
     var cat = this.addCatForm.value;
     cat.imageForShowCase = this.imageHolder[1];
     cat.imageForCart = this.imageHolder[2];
@@ -80,7 +82,6 @@ export class ItemsComponent implements OnInit {
     this.exoticVegetablesService.addLeafyGreenVegetable(cat).subscribe(
       res => {
         const newCat = res.json();
-        debugger;
         this.leafyGreenVegetables.push(newCat);
         this.addCatForm.reset();
         this.toast.setMessage('item added successfully.', 'success');
@@ -103,13 +104,9 @@ export class ItemsComponent implements OnInit {
   }
 
   editLeafyGreenVegetable(cat) {
-    
-    debugger;
-    // var cat = this.addCatForm.value;
     cat.imageForShowCase = this.imageHolder[1];
     cat.imageForCart = this.imageHolder[2];
 
-    debugger;
     this.exoticVegetablesService.editLeafyGreenVegetable(cat).subscribe(
       res => {
         this.isEditing = false;

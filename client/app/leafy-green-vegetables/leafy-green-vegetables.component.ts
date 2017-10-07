@@ -13,6 +13,8 @@ import { AfterViewInit, ViewChild } from '@angular/core';
 import { FiltersComponent } from './filters/filters.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 
+import { ItemsService } from './../services/items.service';
+
 @Component({
   selector: 'app-cats2',
   templateUrl: './leafy-green-vegetables.component.html',
@@ -28,6 +30,9 @@ export class LeafyGreenVegetablesComponent implements OnInit {
 
   isLoading = true;
   isEditing = false;
+
+  leafyGreenVegetable = {};
+  leafyGreenVegetables = [];
 
   @ViewChild('filtersComponent')
   filtersComponent: FiltersComponent;
@@ -56,10 +61,38 @@ export class LeafyGreenVegetablesComponent implements OnInit {
 
   originalData: any = []
 
-  constructor(private dataService: DataService, private cartService: CartService){  }
+  constructor(private dataService: DataService, private cartService: CartService,
+    private exoticVegetablesService: ItemsService){  }
+
+  getLeafyGreenVegetables() {
+    this.exoticVegetablesService.getLeafyGreenVegetables().subscribe(
+      data => {
+        debugger;
+        // var x = {
+        //   "id": 1,
+        //   "name": "Lorem",
+        //   "price": "60.000",
+        //   "available": true,
+        //   "best_seller": true,
+        //   "categories": [
+        //     1,
+        //     4
+        //   ],
+        //   "img": "http://lorempixel.com/200/100/food/",
+        //   "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu."
+        // };
+        // this.leafyGreenVegetables = data;
+
+        this.products = data;
+      },
+      error => console.log(error),
+      () => this.isLoading = false
+    );
+  }
 
   ngOnInit(){
 
+    this.getLeafyGreenVegetables();
 
     this.dataService.getData().then(data => {
       this.originalData = data
@@ -71,8 +104,8 @@ export class LeafyGreenVegetablesComponent implements OnInit {
       }
 
       //Make a deep copy of the original data to keep it immutable
-      this.products = this.originalData.products.slice(0)
-      this.sortProducts('name')
+      // this.products = this.originalData.products.slice(0)
+      // this.sortProducts('name')
     })
   }
 
@@ -197,7 +230,7 @@ export class LeafyGreenVegetablesComponent implements OnInit {
     //If the number of products increased after the filter has been applied then sort again
     //If the number of products remained equal, there's a high chance that the items have been reordered.
     if(prevProducts.length <= this.products.length && this.products.length>1){
-      this.sortProducts(this.currentSorting)
+      // this.sortProducts(this.currentSorting)
     }
 
     //These two types of filters usually add new data to the products showcase so a sort is necessary

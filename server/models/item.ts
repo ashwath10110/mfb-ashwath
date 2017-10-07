@@ -7,7 +7,9 @@ const itemSchema = new mongoose.Schema({
   averageWeightPerPiece: String,
   price: String,
   imageForShowCase: String,
-  imageForCart: String
+  imageForCart: String,
+  available: String,
+  description: String
 });
 
 const item = mongoose.model('itemSchema', itemSchema);

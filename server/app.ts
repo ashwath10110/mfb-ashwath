@@ -17,13 +17,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(morgan('dev'));
 
-var mongoDB = '';
+var mongoDB = 'mongodb://admin:admin@ds113505.mlab.com:13505/mfd-db';
 
 if (process.env.NODE_ENV === 'test') {
-  mongoDB = 'mongodb://admin:admin@ds111895.mlab.com:11895/mfb-db';
+  // mongoDB = 'mongodb://admin:admin@ds111895.mlab.com:11895/mfb-db';
 }
 else{
-  mongoDB = 'mongodb://admin:admin@ds111895.mlab.com:11895/mfb-db';  
+  // mongoDB = 'mongodb://admin:admin@ds111895.mlab.com:11895/mfb-db';  
 }
 
 mongoose.connect(mongoDB, {

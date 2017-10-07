@@ -8,7 +8,9 @@ var itemSchema = new mongoose.Schema({
     averageWeightPerPiece: String,
     price: String,
     imageForShowCase: String,
-    imageForCart: String
+    imageForCart: String,
+    available: String,
+    description: String
 });
 var item = mongoose.model('itemSchema', itemSchema);
 exports.default = item;
