@@ -4094,7 +4094,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/shared/footer/footer.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<span class=\"app-toolbar-filler\"></span>\r\n<div class=\"footer\">\r\n  <div class=\"footer-content\">\r\n    <div>Copyright | <a href=\"http://codenx.com\" target=\"_blank\">CodeNx</a>\r\n    </div>\r\n  </div>\r\n</div>"
+module.exports = "<span class=\"app-toolbar-filler\"></span>\r\n<div class=\"footer\">\r\n  <div class=\"footer-content\">\r\n    <div>Copyright | <a href=\"http://codenx.com\" target=\"_blank\">MFB</a>\r\n    </div>\r\n  </div>\r\n</div>"
 
 /***/ }),
 
